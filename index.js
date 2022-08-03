@@ -56,7 +56,7 @@ app.post("/webhook", (req,res) => {
         let receiveMessage = req.body.events[0].message.text;
         let userId = req.body.events[0].source.userId;
         
-        if(recieveMessage === "userid"){
+        if(receiveMessage === "userid"){
             const dataString = JSON.stringify({
                 replyToken: req.body.events[0].replyToken,
                 messages: [
