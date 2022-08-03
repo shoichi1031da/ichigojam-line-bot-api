@@ -53,12 +53,13 @@ app.post("/webhook", (req,res) => {
     console.log(JSON.stringify(req.body.events[0].message.text));
     if (req.body.events[0].type === "message") {
         // 文字列化したメッセージデータ
-        let receiveMessage = JSON.stringify(req.body.events[0].message.text);
-        let userId = JSON.stringify(req.body.events[0].source.userId);
+        let receiveMessage = req.body.events[0].message.text;
+        let userId = req.body.events[0].source.userId;
+        let dataString = "";
         
         if(receiveMessage == "userid"){
             console.log("成功！");
-            const dataString = JSON.stringify({
+            dataString = JSON.stringify({
                 replyToken: req.body.events[0].replyToken,
                 messages: [
                 {
@@ -69,7 +70,7 @@ app.post("/webhook", (req,res) => {
             })
         }else {
             console.log("失敗！");
-            const dataString = JSON.stringify({
+            dataString = JSON.stringify({
                 replyToken: req.body.events[0].replyToken,
                 messages: [
                     {
