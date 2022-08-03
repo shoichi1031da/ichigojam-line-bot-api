@@ -22,6 +22,7 @@ app.post("/webhook", (req,res) => {
         // 文字列化したメッセージデータ
         let receiveMessage = req.body.events[0].message.text;
         let userId = req.body.events[0].source.userId;
+        userId = JSON.stringify(userId);
 
         if(receiveMessage == "userid"){
         const dataString = JSON.stringify({
