@@ -20,20 +20,20 @@ app.post("/webhook", (req,res) => {
     console.log(req.body.events[0]);
     if (req.body.events[0].type === "message") {
         // 文字列化したメッセージデータ
+        let receiveMessage = req.body.events[0].message.text;
+        let userId = req.body.events[0].source.userId;
+
+        if(receiveMessage == "userid"){
         const dataString = JSON.stringify({
             replyToken: req.body.events[0].replyToken,
             messages: [
                 {
                 "type": "text",
-                "text": "Hello, user"
-                },
-                {
-                "type": "text",
-                "text": "May I help you?"
+                "text": userId
                 }
             ]
         })
-
+        }
         // リクエストヘッダー
         const headers = {
             "Content-Type": "application/json",
