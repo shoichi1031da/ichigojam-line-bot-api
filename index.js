@@ -89,15 +89,16 @@ app.post("/webhook", (req,res) => {
             options.messages[0].text = "https://fukuno.jig.jp/app/csv/ichigojam-cmd.html";
         }else if(led){
             if(ledParam != 0){
-                options.messages[0].text = "$ LINE emoji";
+                options.messages[0].text = "$";
                 options.messages[0].emojis = [{
                     "index": 0,
                     "productID": "5ac222bf031a6752fb806d64",
                     "emojiId": "003"
                 }];
+                console.log("options.messages[0]",options.messages[0]);
             }
             else{
-                options.messages[0].text = "$ LINE emoji";
+                options.messages[0].text = "$";
                 options.messages[0].emojis = [{
                     "index": 0,
                     "productID": "5ac222bf031a6752fb806d64",
