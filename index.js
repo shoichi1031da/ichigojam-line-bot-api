@@ -45,9 +45,10 @@ app.get("/", (req,res) => {
     client.pushMessage(userId,message)
         .then(() => {
             console.log("プッシュメッセージを送信しました");
+            console.log(sendMsg);
         })
         .catch((err) => {
-            req.send("'wrong userID...\n");
+            res.send("'wrong userID...\n");
         })
     res.send("");
 
@@ -63,29 +64,25 @@ app.post("/webhook", (req,res) => {
         let receiveMessage = req.body.events[0].message.text;
         let userId = req.body.events[0].source.userId;
         let dataString = "";
-        
+        let options = {};
+        let replyToken = req.body.events[0].replyToken;
+        let messages = [
+            {
+                "type":"text",
+            }
+        ]
+        options.replyToken = replyToken;
+        options.messages = messages;
+
+        console.log(options);
+
         if(receiveMessage == "userid"){
-            console.log("成功！");
-            dataString = JSON.stringify({
-                replyToken: req.body.events[0].replyToken,
-                messages: [
-                {
-                    "type": "text",
-                    "text": userId
-                }
-                ]
-            })
+            options.messages[0].text = userId;
+            dataString = JSON.stringify(options);
         }else {
-            console.log("失敗！");
-            dataString = JSON.stringify({
-                replyToken: req.body.events[0].replyToken,
-                messages: [
-                    {
-                    "type": "text",
-                    "text": receiveMessage
-                    }
-                ]
-            })
+            options.messages[0].text = "失敗";
+            dataString = JSON.stringify(options);
+            }
         }
         
         // リクエストヘッダー
