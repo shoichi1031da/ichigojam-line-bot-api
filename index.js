@@ -7,7 +7,8 @@ const client = new line.Client({
 const https = require("https");
 const express = require("express");
 const app = express();
-const server = https.createServer(app);
+const http = require("http");
+const server = http.createServer(app);
 
 const PORT = process.env.PORT || 3000;
 const TOKEN = process.env.LINE_ACCESS_TOKEN;
