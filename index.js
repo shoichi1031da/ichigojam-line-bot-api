@@ -7,6 +7,7 @@ const client = new line.Client({
 const https = require("https");
 const express = require("express");
 const app = express();
+const server = https.createServer(app);
 
 const PORT = process.env.PORT || 3000;
 const TOKEN = process.env.LINE_ACCESS_TOKEN;
@@ -108,6 +109,6 @@ app.post("/webhook", (req,res) => {
     }
 })
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`listening on ${PORT}`);
 });
