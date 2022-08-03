@@ -56,7 +56,8 @@ app.post("/webhook", (req,res) => {
         let receiveMessage = JSON.stringify(req.body.events[0].message.text);
         let userId = JSON.stringify(req.body.events[0].source.userId);
         
-        if(receiveMessage === "userid"){
+        if(receiveMessage == "userid"){
+            console.log("成功！");
             const dataString = JSON.stringify({
                 replyToken: req.body.events[0].replyToken,
                 messages: [
@@ -67,6 +68,7 @@ app.post("/webhook", (req,res) => {
                 ]
             })
         }else {
+            console.log("失敗！");
             const dataString = JSON.stringify({
                 replyToken: req.body.events[0].replyToken,
                 messages: [
