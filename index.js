@@ -61,8 +61,13 @@ app.post("/webhook", (req,res) => {
     // console.log(JSON.stringify(req.body.events[0].message.text));
     if (req.body.events[0].type === "message") {
         // 文字列化したメッセージデータ
-        let receiveMessage = req.body.events[0].message.text;
+        let recMsg = req.body.events[0].message.text;
         let userId = req.body.events[0].source.userId;
+        let ledParam = 0;
+        if(recMsg.substr(0,3) == "LED" || recMsg.substr(0,3) == "led"){
+            let led = true;
+            ledParam = parseInt(recMsg.split(recMsg.substr(0,3) )[1]);
+        }
         let dataString = "";
         let options = {};
         let replyToken = req.body.events[0].replyToken;
@@ -75,10 +80,22 @@ app.post("/webhook", (req,res) => {
         options.messages = messages;
 
 
-        if(receiveMessage == "userid"){
+        if(recMsg == "userid"){
             options.messages[0].text = userId;
-        }else if(receiveMessage == "リファレンス" || receiveMessage == "コマンド一覧" || receiveMessage == "コマンド"){
+        }else if(recMsg == "リファレンス" || recMsg == "コマンド一覧" || recMsg == "コマンド"){
             options.messages[0].text = "https://fukuno.jig.jp/app/csv/ichigojam-cmd.html";
+        }else if(led){
+            if(ledParam != 0){
+                options.messages[0].text = "$ LINE emoji";
+                options.messages[0].emojis[0] = {
+                    "index":0,
+                    "productID":"5ac21542031a6752fb806d55",
+                    "emojiId":"029"
+                };
+            }
+            else{
+                options.messages[0].text = "";
+            }
         }
         
         else{
