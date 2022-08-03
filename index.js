@@ -86,6 +86,7 @@ app.post("/webhook", (req,res) => {
         ];
         options.replyToken = replyToken;
         options.messages = messages;
+        options.emojis = emojis;
         
 
 
