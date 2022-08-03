@@ -50,11 +50,11 @@ app.post("/webhook", (req,res) => {
     res.send("HTTP POST request sent to the webhook URL!");
     // ユーザーがボットにメッセージを送った場合、返信メッセージを送る
     console.log(req.body.events[0].message);
-    console.log(req.body.events[0].message.text);
+    console.log(JSON.stringify(req.body.events[0].message.text));
     if (req.body.events[0].type === "message") {
         // 文字列化したメッセージデータ
-        let receiveMessage = req.body.events[0].message.text;
-        let userId = req.body.events[0].source.userId;
+        let receiveMessage = JSON.stringify(req.body.events[0].message.text);
+        let userId = JSON.stringify(req.body.events[0].source.userId);
         
         if(receiveMessage === "userid"){
             const dataString = JSON.stringify({
