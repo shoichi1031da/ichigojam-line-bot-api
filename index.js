@@ -27,13 +27,10 @@ app.get("/", (req,res) => {
     let userId = req.query.id;
     let msg = req.query.msg;
 
-    const message = [{
+    const message = {
         type: "text",
         text: msg
-    },{
-        type: "text",
-        text: ""
-    }]
+    }
 
     client.pushMessage(userId,message)
         .then(() => {
