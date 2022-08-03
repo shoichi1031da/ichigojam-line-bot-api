@@ -23,13 +23,23 @@ app.use(cors({
     origin: "https://fukuno.jig.jp",
 }));
 
+const IchigoJamDecoder = require("./IchigoJamDecoder.js");
+
 app.get("/", (req,res) => {
     let userId = req.query.id;
     let msg = req.query.msg;
+    if(!msg) msg = "msgが未記入です";
+
+    let msgCharaCode = [];
+    for(let i = 0; i < msg.length; i++){
+        msgCharaCode.push(msg.charCodeAt(i));
+    }
+
+    let sendMsg = IchigoJamDecoder(msgCharaCode);
 
     const message = {
         type: "text",
-        text: msg
+        text: sendMsg
     }
 
     client.pushMessage(userId,message)
@@ -37,7 +47,7 @@ app.get("/", (req,res) => {
             console.log("プッシュメッセージを送信しました");
         })
         .catch((err) => {
-            console.log(err);
+            req.send("'wrong userID...\n");
         })
     res.send("");
 
@@ -47,7 +57,7 @@ app.post("/webhook", (req,res) => {
     res.send("HTTP POST request sent to the webhook URL!");
     // ユーザーがボットにメッセージを送った場合、返信メッセージを送る
     console.log(req.body.events[0].message);
-    console.log(JSON.stringify(req.body.events[0].message.text));
+    // console.log(JSON.stringify(req.body.events[0].message.text));
     if (req.body.events[0].type === "message") {
         // 文字列化したメッセージデータ
         let receiveMessage = req.body.events[0].message.text;
