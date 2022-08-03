@@ -89,19 +89,19 @@ app.post("/webhook", (req,res) => {
         }else if(led){
             if(ledParam != 0){
                 options.messages[0].text = "$ LINE emoji $";
-                options.messages[0].emojis[0] = {
+                options.messages[0].emojis = [{
                     "index": 0,
                     "productID": "5ac222bf031a6752fb806d64",
                     "emojiId": "003"
-                };
+                }];
             }
             else{
                 options.messages[0].text = "$ LINE emoji $";
-                options.messages[0].emojis[0] = {
+                options.messages[0].emojis = [{
                     "index":0,
                     "productID":"5ac222bf031a6752fb806d64",
                     "emojiId":"025"
-                };
+                }];
             }
         }
         
