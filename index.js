@@ -1,3 +1,9 @@
+require('dotenv').config();
+const line = require("@line/bot-sdk");
+const client = new line.Client({
+    channelAccessToken: process.env.LINE_ACCESS_TOKEN,
+})
+
 const https = require("https");
 const express = require("express");
 const app = express();
@@ -10,8 +16,28 @@ app.use(express.urlencoded({
     extended: true
 }));
 
+const cors = require("cors");
+app.use(cors({
+    origin: "https://fukuno.jig.jp",
+}));
+
 app.get("/", (req,res) => {
-    res.sendStatus(200);
+    let userId = req.query.id;
+    let msg = req.query.msg;
+
+    const message = {
+        type: "text",
+        text: msg
+    }
+
+    client.pushMessage(userId,message)
+        .then(() => {
+            console.log("プッシュメッセージを送信しました");
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+
 });
 
 app.post("/webhook", (req,res) => {
@@ -20,19 +46,30 @@ app.post("/webhook", (req,res) => {
     console.log(req.body.events[0]);
     if (req.body.events[0].type === "message") {
         // 文字列化したメッセージデータ
-        let receiveMessage = JSON.stringify(req.body.events[0].message.text);
-        let USERID = JSON.stringify(req.body.events[0].source.userId);
+        let receiveMessage = req.body.events[0].message.text;
+        let userId = req.body.events[0].source.userId;
         
-        
-        const dataString = JSON.stringify({
-            replyToken: req.body.events[0].replyToken,
-            messages: [
+        if(recieveMessage === "userid"){
+            const dataString = JSON.stringify({
+                replyToken: req.body.events[0].replyToken,
+                messages: [
                 {
-                "type": "text",
-                "text": USERID
+                    "type": "text",
+                    "text": userId
                 }
-            ]
-        })
+                ]
+            })
+        }else {
+            const dataString = JSON.stringify({
+                replyToken: req.body.events[0].replyToken,
+                messages: [
+                    {
+                    "type": "text",
+                    "text": receiveMessage
+                    }
+                ]
+            })
+        }
         
         // リクエストヘッダー
         const headers = {
