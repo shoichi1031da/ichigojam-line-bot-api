@@ -18,8 +18,8 @@ app.use(express.urlencoded({
     extended: true
 }));
 
-const cros = require("cros");
-app.use(cros({
+const cors = require("cors");
+app.use(cors({
     origin: "https://fukuno.jig.jp",
 }));
 
