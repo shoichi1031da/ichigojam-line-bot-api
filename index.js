@@ -97,13 +97,13 @@ app.post("/webhook", (req,res) => {
         }else if(led){
             if(ledParam != 0){
                 options.message[0].text = "$";
-                options.message[0].emojis.productId = "5ac222bf031a6752fb806d64";
-                options.message[0].emojis.emojiId = "003";
+                options.message[0].emojis[0].productId = "5ac222bf031a6752fb806d64";
+                options.message[0].emojis[0].emojiId = "003";
             }
             else{
                 options.message[0].text = "$";
-                options.message[0].emojis.productId = "5ac222bf031a6752fb806d64";
-                options.message[0].emojis.emojiId = "025";
+                options.message[0].emojis[0].productId = "5ac222bf031a6752fb806d64";
+                options.message[0].emojis[0].emojiId = "025";
             }
         }else{
             options.message[0].text = "Syntax error";
