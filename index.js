@@ -23,7 +23,7 @@ app.post("/webhook", (req,res) => {
         let receiveMessage = JSON.stringify(req.body.events[0].message.text);
         let USERID = JSON.stringify(req.body.events[0].source.userId);
         
-        if(receiveMessage == "userid"){
+        
         const dataString = JSON.stringify({
             replyToken: req.body.events[0].replyToken,
             messages: [
@@ -33,7 +33,7 @@ app.post("/webhook", (req,res) => {
                 }
             ]
         })
-        }
+        
         // リクエストヘッダー
         const headers = {
             "Content-Type": "application/json",
