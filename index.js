@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 const line = require("@line/bot-sdk");
 const client = new line.Client({
     channelAccessToken: process.env.LINE_ACCESS_TOKEN,
@@ -25,10 +25,13 @@ app.get("/", (req,res) => {
     let userId = req.query.id;
     let msg = req.query.msg;
 
-    const message = {
+    const message = [{
         type: "text",
         text: msg
-    }
+    },{
+        type: "text",
+        text: userId
+    }]
 
     client.pushMessage(userId,message)
         .then(() => {
