@@ -74,15 +74,18 @@ app.post("/webhook", (req,res) => {
         options.replyToken = replyToken;
         options.messages = messages;
 
-        console.log(options);
 
         if(receiveMessage == "userid"){
             options.messages[0].text = userId;
+        }else if(receiveMessage == "リファレンス" || receiveMessage == "コマンド一覧" || receiveMessage == "コマンド"){
+            options.messages[0].text = "https://fukuno.jig.jp/app/csv/ichigojam-cmd.html";
+        }
+        
+        else{
+            options.messages[0].text = "Syntax error";
+        }
+        
             dataString = JSON.stringify(options);
-        }else {
-            options.messages[0].text = "失敗";
-            dataString = JSON.stringify(options);
-            }
         
         
         // リクエストヘッダー
