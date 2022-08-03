@@ -65,9 +65,10 @@ app.post("/webhook", (req,res) => {
         let userId = req.body.events[0].source.userId;
         let ledParam = 0;
         let led = false;
+        console.log("recMsg.substr(0,3)",recMsg.substr(0,3));
         if(recMsg.substr(0,3) == "LED" || recMsg.substr(0,3) == "led"){
-            let led = true;
-            ledParam = parseInt(recMsg.split(recMsg.substr(0,3) )[1]);
+            led = true;
+            ledParam = parseInt(recMsg.split(recMsg.substr(0,3))[1]);
         }
         let dataString = "";
         let options = {};
