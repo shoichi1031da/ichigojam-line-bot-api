@@ -32,7 +32,7 @@ app.get("/", (req,res) => {
         text: msg
     },{
         type: "text",
-        text: userId
+        text: ""
     }]
 
     client.pushMessage(userId,message)
@@ -42,13 +42,15 @@ app.get("/", (req,res) => {
         .catch((err) => {
             console.log(err);
         })
+    res.send("");
 
 });
 
 app.post("/webhook", (req,res) => {
     res.send("HTTP POST request sent to the webhook URL!");
     // ユーザーがボットにメッセージを送った場合、返信メッセージを送る
-    console.log(req.body.events[0]);
+    console.log(req.body.events[0].message);
+    console.log(req.body.events[0].message.text);
     if (req.body.events[0].type === "message") {
         // 文字列化したメッセージデータ
         let receiveMessage = req.body.events[0].message.text;
