@@ -68,6 +68,7 @@ app.post("/webhook", (req,res) => {
         console.log("recMsg.substr(0,3)",recMsg.substr(0,3));
         if(recMsg.substr(0,3) == "LED" || recMsg.substr(0,3) == "led"){
             led = true;
+            console.log("led",led);
             ledParam = parseInt(recMsg.split(recMsg.substr(0,3))[1]);
         }
         let dataString = "";
@@ -103,9 +104,7 @@ app.post("/webhook", (req,res) => {
                     "emojiId": "025"
                 }];
             }
-        }
-        
-        else{
+        }else{
             options.messages[0].text = "Syntax error";
         }
         
