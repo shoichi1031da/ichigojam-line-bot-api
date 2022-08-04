@@ -66,8 +66,6 @@ app.post("/webhook", (req,res) => {
     if (req.body.events[0].type === "message") {
         // 文字列化したメッセージデータ
         let recMsg = req.body.events[0].message.text;
-        let reference = parseCsv(recMsg);
-        console.log("reference",reference);
         let userId = req.body.events[0].source.userId;
         let ledParam = 0;
         let led = false;
@@ -88,31 +86,45 @@ app.post("/webhook", (req,res) => {
         options.replyToken = replyToken;
         options.messages = messages;    
 
-        if(recMsg == "userid"){
-            options.messages[0].text = userId;
-        }else if(reference.result){
-            referenceObject = Object.values(reference);
-            console.log("referenceObject",referenceObject);
-            for(const command of referenceObject){
-                options.messages[0].text = command + "\n";
-            }
-        }else if(recMsg == "リファレンス" || recMsg == "コマンド一覧" || recMsg == "コマンド"){
-            options.messages[0].text = "https://fukuno.jig.jp/app/csv/ichigojam-cmd.html";
-        }else if(led){
-            if(ledParam == 0){
-                options.messages[0].text = "⚫️";
-            }else if(ledParam < 0 || ledParam > 0){
-                options.messages[0].text = "🔴";
+
+        const getReference = () => {
+            return new Promise((resolve,reject) => {
+                let reference = parseCsv(recMsg);
+                console.log("reference",reference);
+                resolve(reference);
+            })
+        }
+
+        const sendMsgFnc = async () => {
+            console.log("*");
+            let reference = await getReference();
+            if(recMsg == "userid"){
+                options.messages[0].text = userId;
+            }else if(reference.result){
+                referenceObject = Object.values(reference);
+                console.log("referenceObject",referenceObject);
+                for(const command of referenceObject){
+                    options.messages[0].text = command + "\n";
+                }
+            }else if(recMsg == "リファレンス" || recMsg == "コマンド一覧" || recMsg == "コマンド"){
+                options.messages[0].text = "https://fukuno.jig.jp/app/csv/ichigojam-cmd.html";
+            }else if(led){
+                if(ledParam == 0){
+                    options.messages[0].text = "⚫️";
+                }else if(ledParam < 0 || ledParam > 0){
+                    options.messages[0].text = "🔴";
+                }else{
+                    options.messages[0].text = "Syntax error";
+                }
+                
             }else{
                 options.messages[0].text = "Syntax error";
             }
             
-        }else{
-            options.messages[0].text = "Syntax error";
+                dataString = JSON.stringify(options);
         }
-        
-            dataString = JSON.stringify(options);
-        
+
+        sendMsgFnc();
         
         // リクエストヘッダー
         const headers = {
