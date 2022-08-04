@@ -69,7 +69,6 @@ app.post("/webhook", (req,res) => {
         let userId = req.body.events[0].source.userId;
         let ledParam = 0;
         let led = false;
-        console.log("recMsg.substr(0,3)",recMsg.substr(0,3));
         if(recMsg.substr(0,3) == "LED" || recMsg.substr(0,3) == "led"){
             led = true;
             ledParam = parseInt(recMsg.split(recMsg.substr(0,3))[1]);
@@ -90,6 +89,7 @@ app.post("/webhook", (req,res) => {
         const getReference = () => {
             return new Promise((resolve,reject) => {
                 let reference = parseCsv(recMsg);
+                console.log("***");
                 console.log("reference",reference);
                 resolve(reference);
             })
@@ -98,6 +98,7 @@ app.post("/webhook", (req,res) => {
         const sendMsgFnc = async () => {
             console.log("*");
             let reference = await getReference();
+            console.log("****");
             if(recMsg == "userid"){
                 options.messages[0].text = userId;
             }else if(reference.result){
@@ -121,11 +122,11 @@ app.post("/webhook", (req,res) => {
                 options.messages[0].text = "Syntax error";
             }
             
-                dataString = JSON.stringify(options);
+            dataString = JSON.stringify(options);
+            return dataString;
         }
 
-        sendMsgFnc();
-        
+
         // リクエストヘッダー
         const headers = {
             "Content-Type": "application/json",
@@ -139,7 +140,7 @@ app.post("/webhook", (req,res) => {
             "path": "/v2/bot/message/reply",
             "method": "POST",
             "headers": headers,
-            "body": dataString
+            "body": sendMsgFnc()
         }   
 
         // リクエストの定義

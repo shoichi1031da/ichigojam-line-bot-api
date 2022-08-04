@@ -10,17 +10,18 @@ const main = (MSG) => {
   let msg = MSG;
   console.log(msg);
   fs.createReadStream(__dirname + '/ichigojam_reference.csv')
-  .pipe(csv.parse({columns: true},(err, data) => {
-    let sendData = checkCommand(data,msg);
+  .pipe(csv.parse({columns: true},async (err, data) => {
+    let sendData = await checkCommand(data,msg);
     
-    console.log("checkCommand(data,msg)",sendData);
+    console.log("**");
   }));
   console.log("sendData",sendData);
   return sendData;
 }
 
 const checkCommand = (data,msg) => {
-  
+  return new Promise((resolve,reject) => {
+    
     for(const i in data){
       // console.log(data[i].command);
         if(msg == data[i].command){
@@ -28,7 +29,8 @@ const checkCommand = (data,msg) => {
             sendMsg = data[i];           
         }
     }
-    return {"result":result, "sendMsg":sendMsg};
+    resolve({"result":result, "sendMsg":sendMsg});
+  })
 }
 
 module.exports = main;
