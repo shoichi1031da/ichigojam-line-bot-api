@@ -79,14 +79,14 @@ app.post("/webhook", (req,res) => {
                 "type":"text",
             }
         ]
-        let emojis = [
-            {
-                "index":0,
-            }
-        ];
+        // let emojis = [
+        //     {
+        //         "index":0,
+        //     }
+        // ];
         options.replyToken = replyToken;
         options.message = message;
-        options.message.emojis = emojis;
+        // options.message.emojis = emojis;
         
 
 
@@ -96,14 +96,14 @@ app.post("/webhook", (req,res) => {
             options.message[0].text = "https://fukuno.jig.jp/app/csv/ichigojam-cmd.html";
         }else if(led){
             if(ledParam != 0){
-                options.message[0].text = "$";
-                options.message[0].emojis[0].productId = "5ac222bf031a6752fb806d64";
-                options.message[0].emojis[0].emojiId = "003";
+                options.message[0].text = "☀️";
+                // options.message[0].emojis[0].productId = "5ac222bf031a6752fb806d64";
+                // options.message[0].emojis[0].emojiId = "003";
             }
             else{
-                options.message[0].text = "$";
-                options.message[0].emojis[0].productId = "5ac222bf031a6752fb806d64";
-                options.message[0].emojis[0].emojiId = "025";
+                options.message[0].text = "🌑";
+                // options.message[0].emojis[0].productId = "5ac222bf031a6752fb806d64";
+                // options.message[0].emojis[0].emojiId = "025";
             }
         }else{
             options.message[0].text = "Syntax error";
