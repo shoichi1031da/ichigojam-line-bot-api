@@ -99,7 +99,7 @@ app.post("/webhook", (req,res) => {
                 options.messages[0].text = "⚫️";
                 // options.message[0].emojis[0].productId = "5ac222bf031a6752fb806d64";
                 // options.message[0].emojis[0].emojiId = "025";
-            }else if(ledParam != 0){
+            }else if(ledParam < 0 || ledParam > 0){
                 options.messages[0].text = "🔴";
                 // options.message[0].emojis[0].productId = "5ac222bf031a6752fb806d64";
                 // options.message[0].emojis[0].emojiId = "003";
