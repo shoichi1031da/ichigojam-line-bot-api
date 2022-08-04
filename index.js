@@ -74,7 +74,7 @@ app.post("/webhook", (req,res) => {
         let dataString = "";
         let options = {};
         let replyToken = req.body.events[0].replyToken;
-        let message = [
+        let messages = [
             {
                 "type":"text",
             }
@@ -85,28 +85,28 @@ app.post("/webhook", (req,res) => {
         //     }
         // ];
         options.replyToken = replyToken;
-        options.message = message;
+        options.messages = messages;
         // options.message.emojis = emojis;
         
 
 
         if(recMsg == "userid"){
-            options.message[0].text = userId;
+            options.messages[0].text = userId;
         }else if(recMsg == "リファレンス" || recMsg == "コマンド一覧" || recMsg == "コマンド"){
-            options.message[0].text = "https://fukuno.jig.jp/app/csv/ichigojam-cmd.html";
+            options.messages[0].text = "https://fukuno.jig.jp/app/csv/ichigojam-cmd.html";
         }else if(led){
             if(ledParam != 0){
-                options.message[0].text = "🔴";
+                options.messages[0].text = "🔴";
                 // options.message[0].emojis[0].productId = "5ac222bf031a6752fb806d64";
                 // options.message[0].emojis[0].emojiId = "003";
             }
             else{
-                options.message[0].text = "⚫️";
+                options.messages[0].text = "⚫️";
                 // options.message[0].emojis[0].productId = "5ac222bf031a6752fb806d64";
                 // options.message[0].emojis[0].emojiId = "025";
             }
         }else{
-            options.message[0].text = "Syntax error";
+            options.messages[0].text = "Syntax error";
         }
         
             dataString = JSON.stringify(options);
