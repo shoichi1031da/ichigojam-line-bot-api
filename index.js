@@ -94,17 +94,17 @@ app.post("/webhook", (req,res) => {
             options.messages[0].text = userId;
         }else if(recMsg == "リファレンス" || recMsg == "コマンド一覧" || recMsg == "コマンド"){
             options.messages[0].text = "https://fukuno.jig.jp/app/csv/ichigojam-cmd.html";
-        }else if(led){
-            if(ledParam != 0){
+        }else if(led && typeof ledParam == "number"){
+            if(ledParam == 0){
+                options.messages[0].text = "⚫️";
+                // options.message[0].emojis[0].productId = "5ac222bf031a6752fb806d64";
+                // options.message[0].emojis[0].emojiId = "025";
+            }else{
                 options.messages[0].text = "🔴";
                 // options.message[0].emojis[0].productId = "5ac222bf031a6752fb806d64";
                 // options.message[0].emojis[0].emojiId = "003";
             }
-            else if(ledParam == 0){
-                options.messages[0].text = "⚫️";
-                // options.message[0].emojis[0].productId = "5ac222bf031a6752fb806d64";
-                // options.message[0].emojis[0].emojiId = "025";
-            }
+            
         }else{
             options.messages[0].text = "Syntax error";
         }
