@@ -57,7 +57,7 @@ app.get("/", (req,res) => {
 app.post("/webhook", (req,res) => {
     res.send("HTTP POST request sent to the webhook URL!");
     // ユーザーがボットにメッセージを送った場合、返信メッセージを送る
-    console.log(req.body.events[0].message);
+    // console.log(req.body.events[0].message);
     // console.log(JSON.stringify(req.body.events[0].message.text));
     if (req.body.events[0].type === "message") {
         // 文字列化したメッセージデータ
@@ -96,12 +96,12 @@ app.post("/webhook", (req,res) => {
             options.message[0].text = "https://fukuno.jig.jp/app/csv/ichigojam-cmd.html";
         }else if(led){
             if(ledParam != 0){
-                options.message[0].text = "☀️";
+                options.message[0].text = "🔴";
                 // options.message[0].emojis[0].productId = "5ac222bf031a6752fb806d64";
                 // options.message[0].emojis[0].emojiId = "003";
             }
             else{
-                options.message[0].text = "🌑";
+                options.message[0].text = "⚫️";
                 // options.message[0].emojis[0].productId = "5ac222bf031a6752fb806d64";
                 // options.message[0].emojis[0].emojiId = "025";
             }
