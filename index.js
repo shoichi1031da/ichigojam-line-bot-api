@@ -100,7 +100,7 @@ app.post("/webhook", (req,res) => {
                 // options.message[0].emojis[0].productId = "5ac222bf031a6752fb806d64";
                 // options.message[0].emojis[0].emojiId = "003";
             }
-            else{
+            else if(ledParam == 0){
                 options.messages[0].text = "⚫️";
                 // options.message[0].emojis[0].productId = "5ac222bf031a6752fb806d64";
                 // options.message[0].emojis[0].emojiId = "025";
