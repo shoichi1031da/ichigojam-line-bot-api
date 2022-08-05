@@ -16,20 +16,20 @@ const checkCommand = (data,msg) => {
     }
     
     sendMsg.command =  "■コマンド名：" + sendMsg.command + "\n";
-    if(sendMsg.aname == ""){
-      sendMsg.jpname =  "(読み方：" + sendMsg.jpname + ")";
-      sendMsg.aname =  "";
-    }else{
+    if(sendMsg.aname){
       sendMsg.jpname =  "(読み方：" + sendMsg.jpname + "、";
       sendMsg.aname =  "別名：" + sendMsg.aname + ")\n";
+    }else{
+      sendMsg.jpname =  "(読み方：" + sendMsg.jpname + ")\n";
+      sendMsg.aname =  "";
     }
     sendMsg.format =  "■書式：" + sendMsg.format + "\n"; 
     sendMsg.example =  "■例：" + sendMsg.example + "\n"; 
     sendMsg.description =  "■説明：" + sendMsg.description + "\n"; 
-    if(sendMsg.document == ""){
-      sendMsg.document =  ""; 
-    }else{
+    if(sendMsg.document){
       sendMsg.document =  "■資料：" + sendMsg.document; 
+    }else{
+      sendMsg.document =  ""; 
     }
     const sendData = {"result":result,"commandInfo":sendMsg};
     
