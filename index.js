@@ -147,12 +147,9 @@ app.post("/webhook", (req,res) => {
             console.log("reference",reference);
             checkCommand(reference)
             .then((response) => {
+                if(response.result){
                 options.messages[0].text = response;
-                dataString = JSON.stringify(options);
-            })
-            .catch((error) => {
-                console.log(error);
-                if(recMsg == "userid"){
+                }else if(recMsg == "userid"){
                     options.messages[0].text = userId;
                 }else if(recMsg == "リファレンス" || recMsg == "コマンド一覧" || recMsg == "コマンド"){
                     options.messages[0].text = "https://fukuno.jig.jp/app/csv/ichigojam-cmd.html";
@@ -170,33 +167,33 @@ app.post("/webhook", (req,res) => {
                 }
         
                 dataString = JSON.stringify(options);
-            })
-            console.log("dataString",dataString);
-            // リクエストに渡すオプション
-            const webhookOptions = {
-                "hostname": "api.line.me",
-                "path": "/v2/bot/message/reply",
-                "method": "POST",
-                "headers": headers,
-                "body": dataString
-            }   
-            // リクエストの定義
-            const request = https.request(webhookOptions, (res) => {
-                res.on("data", (d) => {
-                process.stdout.write(d)
+            
+                console.log("dataString",dataString);
+                // リクエストに渡すオプション
+                const webhookOptions = {
+                    "hostname": "api.line.me",
+                    "path": "/v2/bot/message/reply",
+                    "method": "POST",
+                    "headers": headers,
+                    "body": dataString
+                }   
+                // リクエストの定義
+                const request = https.request(webhookOptions, (res) => {
+                    res.on("data", (d) => {
+                    process.stdout.write(d)
+                    })
                 })
+            
+                // エラーをハンドル
+                request.on("error", (err) => {
+                    console.error(err)
+                })
+            
+                // データを送信
+                request.write(dataString)
+                request.end()
             })
-        
-            // エラーをハンドル
-            request.on("error", (err) => {
-                console.error(err)
-            })
-        
-            // データを送信
-            request.write(dataString)
-            request.end()
         })
-        console.log("end");
     }
 })
 
