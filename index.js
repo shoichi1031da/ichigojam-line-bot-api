@@ -101,47 +101,49 @@ app.post("/webhook", (req,res) => {
     // console.log(req.body.events[0].message);
     // console.log(JSON.stringify(req.body.events[0].message.text));
     if (req.body.events[0].type === "message") {
-        // 文字列化したメッセージデータ
-        let recMsg = req.body.events[0].message.text;
-        let userId = req.body.events[0].source.userId;
-        let ledParam = 0;
-        let led = false;
-        if(recMsg.substr(0,3) == "LED" || recMsg.substr(0,3) == "led"){
-            led = true;
-            ledParam = parseInt(recMsg.split(recMsg.substr(0,3))[1]);
-        }
-        let dataString = "";
-        let options = {};
-        let replyToken = req.body.events[0].replyToken;
-        let messages = [
-            {
-                "type":"text",
-            }
-        ]
-       
-        options.replyToken = replyToken;
-        options.messages = messages;
-
-        // リクエストヘッダー
-        const headers = {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + TOKEN
-
-        }
-
-        const checkCommand = (reference) => {
-            return new Promise((resolve,reject) => {
-                if(reference.result){
-                    referenceObject = Object.values(reference.commandInfo).slice(1);
-                    console.log("referenceObject",referenceObject);
-                }
-                resolve(referenceObject);
-            })
-        }
-
+        
         callReference(recMsg)
-        .then((res)=>{
-            let reference = res;
+        .then((ref)=>{
+            // 文字列化したメッセージデータ
+            let recMsg = req.body.events[0].message.text;
+            console.log("recMsg",recMsg);
+            let userId = req.body.events[0].source.userId;
+            let ledParam = 0;
+            let led = false;
+            if(recMsg.substr(0,3) == "LED" || recMsg.substr(0,3) == "led"){
+                led = true;
+                ledParam = parseInt(recMsg.split(recMsg.substr(0,3))[1]);
+            }
+            let dataString = "";
+            let options = {};
+            let replyToken = req.body.events[0].replyToken;
+            let messages = [
+                {
+                    "type":"text",
+                }
+            ]
+           
+            options.replyToken = replyToken;
+            options.messages = messages;
+    
+            // リクエストヘッダー
+            const headers = {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + TOKEN
+    
+            }
+    
+            const checkCommand = (reference) => {
+                return new Promise((resolve,reject) => {
+                    if(reference.result){
+                        referenceObject = Object.values(reference.commandInfo).slice(1);
+                        console.log("referenceObject",referenceObject);
+                    }
+                    resolve(referenceObject);
+                })
+            }
+
+            let reference = ref;
             console.log("reference",reference);
             checkCommand(reference)
             .then((response) => {
