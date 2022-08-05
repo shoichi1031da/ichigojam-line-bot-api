@@ -15,25 +15,25 @@ const checkCommand = (data,msg) => {
         }
     }
     
-    sendMsg.command =  "■コマンド名：" + sendMsg.command + "\n";
     if(sendMsg.command == "'"){
-      sendMsg.example =  "'" + sendMsg.example;
+      sendMsg.example = "'" + sendMsg.example;
     }
+    sendMsg.command = "■コマンド名：" + sendMsg.command + "\n";
     if(sendMsg.aname){
-      sendMsg.jpname =  "(読み方：" + sendMsg.jpname + "、";
-      sendMsg.aname =  "別名：" + sendMsg.aname + ")\n";
+      sendMsg.jpname = "(読み方：" + sendMsg.jpname + "、";
+      sendMsg.aname = "別名：" + sendMsg.aname + ")\n";
     }else{
-      sendMsg.jpname =  "(読み方：" + sendMsg.jpname + ")\n";
-      sendMsg.aname =  "";
+      sendMsg.jpname = "(読み方：" + sendMsg.jpname + ")\n";
+      sendMsg.aname = "";
     }
-    sendMsg.format =  "■書式：" + sendMsg.format + "\n"; 
-    sendMsg.example =  "■例：" + sendMsg.example + "\n"; 
+    sendMsg.format = "■書式：" + sendMsg.format + "\n"; 
+    sendMsg.example = "■例：" + sendMsg.example + "\n"; 
     if(sendMsg.document){
-      sendMsg.description =  "■説明：" + sendMsg.description + "\n"; 
-      sendMsg.document =  "■資料：" + sendMsg.document; 
+      sendMsg.description = "■説明：" + sendMsg.description + "\n"; 
+      sendMsg.document = "■資料：" + sendMsg.document; 
     }else{
-      sendMsg.description =  "■説明：" + sendMsg.description; 
-      sendMsg.document =  ""; 
+      sendMsg.description = "■説明：" + sendMsg.description; 
+      sendMsg.document = ""; 
     }
     const sendData = {"result":result,"commandInfo":sendMsg};
     
