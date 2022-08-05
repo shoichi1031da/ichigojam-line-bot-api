@@ -122,6 +122,13 @@ app.post("/webhook", (req,res) => {
         options.replyToken = replyToken;
         options.messages = messages;
 
+        // リクエストヘッダー
+        const headers = {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + TOKEN
+
+        }
+
         const checkCommand = (reference) => {
             return new Promise((resolve,reject) => {
                 let a = [];
@@ -163,24 +170,19 @@ app.post("/webhook", (req,res) => {
         
                 dataString = JSON.stringify(options);
             })
+
+            // リクエストに渡すオプション
+            const webhookOptions = {
+                "hostname": "api.line.me",
+                "path": "/v2/bot/message/reply",
+                "method": "POST",
+                "headers": headers,
+                "body": dataString
+            }   
         })
           
 
-        // リクエストヘッダー
-        const headers = {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + TOKEN
 
-        }
-
-        // リクエストに渡すオプション
-        const webhookOptions = {
-            "hostname": "api.line.me",
-            "path": "/v2/bot/message/reply",
-            "method": "POST",
-            "headers": headers,
-            "body": sendMsgFnc()
-        }   
 
         // リクエストの定義
         const request = https.request(webhookOptions, (res) => {
