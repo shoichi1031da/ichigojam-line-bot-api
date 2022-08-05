@@ -18,7 +18,7 @@ IchigoJam BASICのコマンドや特定の言葉（隠しコマンド）を送�
 ### ■例1：「リファレンス」または「コマンド一覧」
 → https://fukuno.jig.jp/app/csv/ichigojam-cmd.html を返します。
 
-###　■例2：「WAIT」または「wait」
+### ■例2：「WAIT」または「wait」
 → WAITコマンドの意味を返します（WAIT以外の全てコマンドにも対応）。
 
 ### ■例3：隠しコマンド（下記隠しコマンドを送信してみてください）
