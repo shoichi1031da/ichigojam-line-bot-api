@@ -102,12 +102,12 @@ app.post("/webhook", (req,res) => {
     // console.log(JSON.stringify(req.body.events[0].message.text));
     if (req.body.events[0].type === "message") {
         
+        let recMsg = req.body.events[0].message.text;
+        console.log("recMsg",recMsg);
+        let userId = req.body.events[0].source.userId;
         callReference(recMsg)
         .then((ref)=>{
             // 文字列化したメッセージデータ
-            let recMsg = req.body.events[0].message.text;
-            console.log("recMsg",recMsg);
-            let userId = req.body.events[0].source.userId;
             let ledParam = 0;
             let led = false;
             if(recMsg.substr(0,3) == "LED" || recMsg.substr(0,3) == "led"){
