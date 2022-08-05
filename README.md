@@ -48,13 +48,24 @@ https://fukuno.jig.jp/app/IchigoJam/#10%20I%3D%22%22%0A20%20M%3D%22IchigoJamweb%
 
 ・開発者モードで使用するユーザーIDはこのLINE Bot内での使用に限ります（他の用途で使用することはありません）。
 
+・開発者モードでIchigoJamからメッセージを送る場合、GOTOなどの繰り返し処理で大量のメッセージを送ることはしないでください。
+
+（誤って大量に送信してしまった場合を考慮して、1件メッセージを送り終わった際に約5秒間の待機時間を設けています。）
+
 ・Botのアイコン画像は「IchigoJam」が提供する画像を編集して作成しております。
 
-・Bot内のリファレンス参照先
+・Bot内のリファレンス、サイト参照先
 
 https://fukuno.jig.jp/app/csv/ichigojam-cmd.html
 
 https://github.com/ichigojam/doc/
+
+https://ichigojam.github.io/print/ja/
+
+https://ichigojam.net/
+
+http://mixjuice.shizentai.jp/
+
 
 ・その他質問などはTwitterのDMからお願いします。
 
