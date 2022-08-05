@@ -16,6 +16,9 @@ const checkCommand = (data,msg) => {
     }
     
     sendMsg.command =  "■コマンド名：" + sendMsg.command + "\n";
+    if(sendMsg.command == "'"){
+      sendMsg.command =  "■コマンド名：'" + sendMsg.command + "\n";
+    }
     if(sendMsg.aname){
       sendMsg.jpname =  "(読み方：" + sendMsg.jpname + "、";
       sendMsg.aname =  "別名：" + sendMsg.aname + ")\n";
