@@ -136,7 +136,7 @@ app.post("/webhook", (req,res) => {
             const checkCommand = (reference) => {
                 return new Promise((resolve,reject) => {
                     if(reference.result){
-                        referenceObject = Object.values(reference.commandInfo).slice(1);
+                        let referenceObject = Object.values(reference.commandInfo).slice(1);
                         console.log("referenceObject",referenceObject);
                     }
                     resolve(referenceObject);
