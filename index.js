@@ -149,7 +149,7 @@ app.post("/webhook", (req,res) => {
             .then((response) => {
                 if(ref.result){
                     let text = "";
-                    for(const i in text){
+                    for(const i in response){
                         text += response[i];
                     }
                     options.messages[0].text = text;
