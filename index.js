@@ -131,7 +131,6 @@ app.post("/webhook", (req,res) => {
 
         const checkCommand = (reference) => {
             return new Promise((resolve,reject) => {
-                let a = [];
                 if(reference.result){
                     referenceObject = Object.values(reference.commandInfo).slice(1);
                     console.log("referenceObject",referenceObject);
@@ -195,7 +194,7 @@ app.post("/webhook", (req,res) => {
             request.write(dataString)
             request.end()
         })
-
+        console.log("end");
     }
 })
 

@@ -16,7 +16,7 @@ const checkCommand = (data,msg) => {
             sendMsg = data[i];           
         }
     }
-    console.log(sendMsg);
+    // console.log(sendMsg);
       sendMsg.command =  "■コマンド名：" + sendMsg.command + "\n";
       sendMsg.aname =  "(別名：" + sendMsg.aname + ")\n";
       sendMsg.jpname =  "■読み方：" + sendMsg.jpname + "\n";
