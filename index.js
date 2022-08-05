@@ -148,7 +148,11 @@ app.post("/webhook", (req,res) => {
             checkCommand(reference)
             .then((response) => {
                 if(ref.result){
-                options.messages[0].text = response;
+                    let text = "";
+                    for(const i in text){
+                        text += response[i];
+                    }
+                    options.messages[0].text = text;
                 }else if(recMsg == "userid"){
                     options.messages[0].text = userId;
                 }else if(recMsg == "リファレンス" || recMsg == "コマンド一覧" || recMsg == "コマンド"){
