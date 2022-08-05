@@ -120,6 +120,8 @@ app.post("/webhook", (req,res) => {
                     options.messages[0].text = userId;
                 }else if(recMsg == "jig.jp2022"){
                     options.messages[0].text = "新社屋おめでとう🎉\nhttps://fukuno.jig.jp/3648";
+                }else if(recMsg == "隠しコマンド"){
+                    options.messages[0].text = "jig.jp2022\nリファレンス\nLED1\nLED0\nかわくだりゲーム\nIchigoJam\nIchigoJamweb\nMixJuice";
                 }else if(recMsg == "IchigoJam" || recMsg == "ichigojam" || recMsg == "イチゴジャム" || recMsg == "いちごじゃむ" || recMsg == "いちごジャム"){
                     options.messages[0].text = "https://ichigojam.net/";
                 }else if(recMsg == "IchigoJamweb" || recMsg == "ichigojamweb" || recMsg == "IchigoJamWeb" || recMsg == "ichigojamWeb" || recMsg == "IchigoJam web" || recMsg == "IchigoJam Web"){
