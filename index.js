@@ -54,14 +54,12 @@ app.get("/", (req,res) => {
     .catch((err) => {
         res.send("'wrong userID...\n");
     })
-    ressend("");
+    res.send("");
 });
 
 app.post("/webhook", (req,res) => {
     res.send("HTTP POST request sent to the webhook URL!");
     // ユーザーがボットにメッセージを送った場合、返信メッセージを送る
-    // console.log(req.body.events[0].message);
-    // console.log(JSON.stringify(req.body.events[0].message.text));
     if (req.body.events[0].type === "message") {
         
         let recMsg = req.body.events[0].message.text;
