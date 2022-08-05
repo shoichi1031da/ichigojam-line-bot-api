@@ -52,7 +52,7 @@ https://fukuno.jig.jp/app/IchigoJam/#10%20I%3D%22%22%0A20%20M%3D%22IchigoJamweb%
 
 （誤って大量に送信してしまった場合を考慮して、1件メッセージを送り終わった際に約5秒間の待機時間を設けています。）
 
-・Botのアイコン画像は「IchigoJam」が提供する画像を編集して作成しております。
+・Botのアイコン画像は「IchigoJam」が提供する画像を編集して作成しております。CC BY IchigoJam / https://ichigojam.net/
 
 ・Bot内のリファレンス、サイト参照先
 
