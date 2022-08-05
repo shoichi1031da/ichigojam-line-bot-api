@@ -147,7 +147,7 @@ app.post("/webhook", (req,res) => {
             console.log("reference",reference);
             checkCommand(reference)
             .then((response) => {
-                if(response.result){
+                if(ref.result){
                 options.messages[0].text = response;
                 }else if(recMsg == "userid"){
                     options.messages[0].text = userId;
