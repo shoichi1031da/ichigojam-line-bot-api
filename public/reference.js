@@ -1,6 +1,7 @@
 const fs = require('fs');
 const csv = require("csv");
 const {parse} = require('csv-parse/sync');
+const { send } = require('process');
 
 const checkCommand = (data,msg) => {
   return new Promise((resolve, reject) => {
@@ -15,13 +16,21 @@ const checkCommand = (data,msg) => {
     }
     
     sendMsg.command =  "■コマンド名：" + sendMsg.command + "\n";
-    sendMsg.jpname =  "(読み方：" + sendMsg.jpname + "、";
-    sendMsg.aname =  "別名：" + sendMsg.aname + ")\n";
+    if(sendMsg.aname == ""){
+      sendMsg.jpname =  "(読み方：" + sendMsg.jpname + ")";
+      sendMsg.aname =  "";
+    }else{
+      sendMsg.jpname =  "(読み方：" + sendMsg.jpname + "、";
+      sendMsg.aname =  "別名：" + sendMsg.aname + ")\n";
+    }
     sendMsg.format =  "■書式：" + sendMsg.format + "\n"; 
     sendMsg.example =  "■例：" + sendMsg.example + "\n"; 
     sendMsg.description =  "■説明：" + sendMsg.description + "\n"; 
-    sendMsg.print =  "■資料：" + sendMsg.print; 
-    
+    if(sendMsg.document == ""){
+      sendMsg.document =  ""; 
+    }else{
+      sendMsg.document =  "■資料：" + sendMsg.document; 
+    }
     const sendData = {"result":result,"commandInfo":sendMsg};
     
   resolve(sendData);
