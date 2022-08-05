@@ -1,13 +1,11 @@
 const fs = require('fs');
 const csv = require("csv");
 const {parse} = require('csv-parse/sync');
-let sendData = {};
-let result = false;
-let sendMsg = [];
-let count = 0;
 
 const checkCommand = (data,msg) => {
   return new Promise((resolve, reject) => {
+    let result = false;
+    let sendMsg = [];
     
     for(const i in data){
       // console.log(data[i].command);
@@ -16,18 +14,18 @@ const checkCommand = (data,msg) => {
             sendMsg = data[i];           
         }
     }
-    // console.log(sendMsg);
-      sendMsg.command =  "■コマンド名：" + sendMsg.command + "\n";
-      sendMsg.aname =  "(別名：" + sendMsg.aname + ")\n";
-      sendMsg.jpname =  "■読み方：" + sendMsg.jpname + "\n";
-      sendMsg.format =  "■書式：" + sendMsg.format + "\n"; 
-      sendMsg.example =  "■例：" + sendMsg.example + "\n"; 
-      sendMsg.description =  "■説明：" + sendMsg.description; 
     
-    // return {"result":result, "sendMsg":sendMsg};
+    sendMsg.command =  "■コマンド名：" + sendMsg.command + "\n";
+    sendMsg.aname =  "(別名：" + sendMsg.aname + ")\n";
+    sendMsg.jpname =  "■読み方：" + sendMsg.jpname + "\n";
+    sendMsg.format =  "■書式：" + sendMsg.format + "\n"; 
+    sendMsg.example =  "■例：" + sendMsg.example + "\n"; 
+    sendMsg.description =  "■説明：" + sendMsg.description; 
+    
+    const sendData = {"result":result,"commandInfo":sendMsg};
+    console.log("sendData",sendData);
 
-  resolve({"result":result,"commandInfo":sendMsg});
-
+  resolve(sendData);
   })
 }
 
@@ -40,11 +38,10 @@ const main = (MSG) => {
     .pipe(csv.parse({columns: true}, (err, data) => {
       checkCommand(data,msg)
       .then((res)=>{
-        // console.log("sendData",res);
         resolve(res);
       });
     }));
-    // return sendData;
+    
   })
 
 }
