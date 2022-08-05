@@ -170,7 +170,7 @@ app.post("/webhook", (req,res) => {
         
                 dataString = JSON.stringify(options);
             })
-
+            console.log("dataString",dataString);
             // リクエストに渡すオプション
             const webhookOptions = {
                 "hostname": "api.line.me",
@@ -179,26 +179,23 @@ app.post("/webhook", (req,res) => {
                 "headers": headers,
                 "body": dataString
             }   
-        })
-          
-
-
-
-        // リクエストの定義
-        const request = https.request(webhookOptions, (res) => {
-            res.on("data", (d) => {
-            process.stdout.write(d)
+            // リクエストの定義
+            const request = https.request(webhookOptions, (res) => {
+                res.on("data", (d) => {
+                process.stdout.write(d)
+                })
             })
+        
+            // エラーをハンドル
+            request.on("error", (err) => {
+                console.error(err)
+            })
+        
+            // データを送信
+            request.write(dataString)
+            request.end()
         })
-    
-        // エラーをハンドル
-        request.on("error", (err) => {
-            console.error(err)
-        })
-    
-        // データを送信
-        request.write(dataString)
-        request.end()
+
     }
 })
 
