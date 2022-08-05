@@ -41,44 +41,6 @@ app.get("/", (req,res) => {
 
     let sendMsg = IchigoJamDecoder(msgCharaCode);
     
-    // const checkCommand = (reference) => {
-    //     return new Promise((resolve,reject) => {
-    //         let a = [];
-    //         if(reference.result){
-    //             referenceObject = Object.values(reference.commandInfo).slice(1);
-    //             console.log("referenceObject",referenceObject);
-    //         }
-    //         resolve(referenceObject);
-    //     })
-    // }
-
-    // callReference(msg)
-    // .then((respn)=>{
-    //     let reference = respn;
-    //     checkCommand(reference)
-    //     .then((resp) => {
-    //         console.log("callback_a",resp);
-    //         let text = "";
-    //         for(const i in resp){
-    //             text += resp[i];
-    //         }
-    //         let message = {
-    //             "type": "text",
-    //             "text": text 
-    //         }
-    //         console.log("message",message);
-    //         client.pushMessage(userId,message)
-    //             .then(() => {
-    //                 console.log("プッシュメッセージを送信しました");
-    //                 console.log(sendMsg);
-    //             })
-    //             .catch((err) => {
-    //                 res.send("'wrong userID...\n");
-    //             })
-    //         res.send("");
-    //     });
-    // })
-
     const message = {
         type: "text",
         text: sendMsg
@@ -162,6 +124,8 @@ app.post("/webhook", (req,res) => {
                     options.messages[0].text = "https://ichigojam.net/";
                 }else if(recMsg == "IchigoJamweb" || recMsg == "ichigojamweb" || recMsg == "IchigoJamWeb" || recMsg == "ichigojamWeb" || recMsg == "IchigoJam web" || recMsg == "IchigoJam Web"){
                     options.messages[0].text = "https://fukuno.jig.jp/app/IchigoJam/";
+                }else if(recMsg == "MixJuice" || recMsg == "mixjuice" || recMsg == "ミックスジュース" || recMsg == "みっくすじゅーす" || recMsg == "みっくすジュース"){
+                    options.messages[0].text = "http://mixjuice.shizentai.jp/";
                 }else if(recMsg == "川下りゲーム" || recMsg == "川下り" || recMsg == "かわくだりゲーム" || recMsg == "かわくだり"){
                     options.messages[0].text = '10 CLS:\n20 LC X,5:?"0"\n30 LC RND(32),23:?"*"\n35 WAIT 3\n36 X=X-BTN(28)+BTN(29)\n40 IF SCR(X,5)=0 GOTO20';
                 }else if(recMsg == "リファレンス" || recMsg == "コマンド一覧" || recMsg == "コマンド"){
