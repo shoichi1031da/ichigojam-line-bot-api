@@ -60,7 +60,7 @@
 59,NOT,ノット,!,NOT 式,IF NOT A=1 LED 1,式が0の時に1、それ以外で0を返す,,
 60,!,ノット,NOT,! 式,IF !(A=1) LED 1,式が0の時に1、それ以外で0を返す,,
 61,REM,リマーク,',REM,REM START,これ以降のコマンドを実行しない（コメント機能）,,
-62,',シングル・クォート,REM,', START,これ以降のコマンドを実行しない（コメント機能）,,
+62,',シングル・クォート,REM,'START,これ以降のコマンドを実行しない（コメント機能）,,
 63,FOR,フォー,,FOR 変数=数1 TO 数2 {STEP 数3}:コマンド:NEXT,FOR I=0 TO 10:?I:NEXT,変数に数1をいれ、数2になるまで数3ずつ増やしながらNEXTまでをくりかえす （STEPは省略可、6段まで）,https://ichigojam.github.io/print/ja/FOR.html,
 64,TO,トゥー,,FOR 変数=数1 TO 数2 {STEP 数3}:コマンド:NEXT,FOR I=0 TO 10:?I:NEXT,変数に数1をいれ、数2になるまで数3ずつ増やしながらNEXTまでをくりかえす （STEP省略時は数3は1、6段まで）,https://ichigojam.github.io/print/ja/FOR.html,
 65,STEP,ステップ,,FOR 変数=数1 TO 数2 STEP 数3:コマンド:NEXT,FOR I=0 TO 10:?I:NEXT,変数に数1をいれ、数2になるまで数3ずつ増やしながらNEXTまでをくりかえす （STEPは省略可、6段まで）,https://ichigojam.github.io/print/ja/FOR.html,
