@@ -1,0 +1,3 @@
+10 I="あなたのLINEのユーザーID"
+20 M="message"
+30 ?"MJ GETS ichigojam-line-bot.herokuapp.com/?id=";STR$(I);"msg=";STR$(M)

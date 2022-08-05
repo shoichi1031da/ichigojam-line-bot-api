@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 const line = require("@line/bot-sdk");
 const client = new line.Client({
     channelAccessToken: process.env.LINE_ACCESS_TOKEN,
