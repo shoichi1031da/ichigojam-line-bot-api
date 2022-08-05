@@ -30,7 +30,7 @@ const callReference = require("./public/reference.js");
 
 app.get("/", (req,res) => {
 
-    let userId = req.query.id;
+    const userId = req.query.id;
     let msg = req.query.msg;
     if(!msg) msg = "msgが未記入です";
     
@@ -39,12 +39,13 @@ app.get("/", (req,res) => {
         msgCharaCode.push(msg.charCodeAt(i));
     }
 
-    let sendMsg = IchigoJamDecoder(msgCharaCode);
+    const sendMsg = IchigoJamDecoder(msgCharaCode);
     
     const message = {
         type: "text",
         text: sendMsg
     }
+    console.log("sendMsg:",sendMsg);
 
     client.pushMessage(userId,message)
     .then(() => {
@@ -52,6 +53,7 @@ app.get("/", (req,res) => {
         console.log(sendMsg);
     })
     .catch((err) => {
+        console.log(err);
         res.send("'wrong userID...\n");
     })
     res.send("");
