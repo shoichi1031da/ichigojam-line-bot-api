@@ -65,17 +65,20 @@ app.post("/webhook", (req,res) => {
     if (req.body.events[0].type === "message") {
         
         let recMsg = req.body.events[0].message.text;
-        console.log("recMsg",recMsg);
+            console.log("recMsg",recMsg);
         let userId = req.body.events[0].source.userId;
+
+        //送られたメッセージをIchigoJamのリファレンス参照
         callReference(recMsg)
         .then((ref)=>{
-            // 文字列化したメッセージデータ
+            // LEDコマンドの処理
             let ledParam = 0;
             let led = false;
             if(recMsg.substr(0,3) == "LED" || recMsg.substr(0,3) == "led"){
                 led = true;
                 ledParam = parseInt(recMsg.split(recMsg.substr(0,3))[1]);
             }
+            // LINEに送るデータ管理
             let dataString = "";
             let options = {};
             let replyToken = req.body.events[0].replyToken;
@@ -94,7 +97,8 @@ app.post("/webhook", (req,res) => {
                 "Authorization": "Bearer " + TOKEN
     
             }
-    
+            
+            //リファレンス（reference.js）から返ってきた結果を配列に格納（後日修正予定）
             const checkCommand = (reference) => {
                 return new Promise((resolve,reject) => {
                     let referenceObject = [];
@@ -107,9 +111,11 @@ app.post("/webhook", (req,res) => {
             }
 
             let reference = ref;
-            console.log("reference",reference);
+            
+
             checkCommand(reference)
             .then((response) => {
+                //送られてきたメッセージがリファレンスのコマンドと合致した時
                 if(ref.result){
                     let text = "";
                     for(const i in response){
@@ -148,6 +154,7 @@ app.post("/webhook", (req,res) => {
                 dataString = JSON.stringify(options);
             
                 console.log("dataString",dataString);
+                
                 // リクエストに渡すオプション
                 const webhookOptions = {
                     "hostname": "api.line.me",

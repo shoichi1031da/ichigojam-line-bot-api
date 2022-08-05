@@ -15,8 +15,8 @@ const checkCommand = (data,msg) => {
     }
     
     sendMsg.command =  "■コマンド名：" + sendMsg.command + "\n";
-    sendMsg.aname =  "(別名：" + sendMsg.aname + "、";
-    sendMsg.jpname =  "読み方：" + sendMsg.jpname + ")\n";
+    sendMsg.jpname =  "(読み方：" + sendMsg.jpname + "、";
+    sendMsg.aname =  "別名：" + sendMsg.aname + ")\n";
     sendMsg.format =  "■書式：" + sendMsg.format + "\n"; 
     sendMsg.example =  "■例：" + sendMsg.example + "\n"; 
     sendMsg.description =  "■説明：" + sendMsg.description + "\n"; 
@@ -31,13 +31,11 @@ const checkCommand = (data,msg) => {
 const main = (MSG) => {
   return new Promise((resolve, reject) => {
 
-    let msg = MSG;
-    // console.log(msg);
     fs.createReadStream(__dirname + '/ichigojam_reference.csv')
     .pipe(csv.parse({columns: true}, (err, data) => {
-      checkCommand(data,msg)
-      .then((res)=>{
-        resolve(res);
+      checkCommand(data,MSG)
+      .then((sendData)=>{
+        resolve(sendData);
       });
     }));
     
