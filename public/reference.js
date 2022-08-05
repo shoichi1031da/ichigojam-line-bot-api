@@ -25,10 +25,11 @@ const checkCommand = (data,msg) => {
     }
     sendMsg.format =  "■書式：" + sendMsg.format + "\n"; 
     sendMsg.example =  "■例：" + sendMsg.example + "\n"; 
-    sendMsg.description =  "■説明：" + sendMsg.description + "\n"; 
     if(sendMsg.document){
+      sendMsg.description =  "■説明：" + sendMsg.description + "\n"; 
       sendMsg.document =  "■資料：" + sendMsg.document; 
     }else{
+      sendMsg.description =  "■説明：" + sendMsg.description; 
       sendMsg.document =  ""; 
     }
     const sendData = {"result":result,"commandInfo":sendMsg};
