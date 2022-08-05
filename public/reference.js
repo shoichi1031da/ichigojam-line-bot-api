@@ -8,7 +8,6 @@ const checkCommand = (data,msg) => {
     let sendMsg = [];
     
     for(const i in data){
-      // console.log(data[i].command);
         if(msg == data[i].command || msg.toUpperCase() == data[i].command){
             result = true;
             sendMsg = data[i];           
@@ -16,15 +15,15 @@ const checkCommand = (data,msg) => {
     }
     
     sendMsg.command =  "■コマンド名：" + sendMsg.command + "\n";
-    sendMsg.aname =  "(別名：" + sendMsg.aname + ")\n";
-    sendMsg.jpname =  "■読み方：" + sendMsg.jpname + "\n";
+    sendMsg.aname =  "(別名：" + sendMsg.aname + "、";
+    sendMsg.jpname =  "読み方：" + sendMsg.jpname + ")\n";
     sendMsg.format =  "■書式：" + sendMsg.format + "\n"; 
     sendMsg.example =  "■例：" + sendMsg.example + "\n"; 
-    sendMsg.description =  "■説明：" + sendMsg.description; 
+    sendMsg.description =  "■説明：" + sendMsg.description + "\n"; 
+    sendMsg.print =  "■資料：" + sendMsg.print; 
     
     const sendData = {"result":result,"commandInfo":sendMsg};
-    console.log("sendData",sendData);
-
+    
   resolve(sendData);
   })
 }
