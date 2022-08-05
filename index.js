@@ -56,7 +56,7 @@ app.get("/", (req,res) => {
         console.log(err);
         res.send("'wrong userID...\n");
     })
-    res.send("");
+    setTimeout(()=>{res.send("'5000")},5000);
 });
 
 app.post("/webhook", (req,res) => {
