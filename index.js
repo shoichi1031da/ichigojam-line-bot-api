@@ -155,6 +155,14 @@ app.post("/webhook", (req,res) => {
                     options.messages[0].text = text;
                 }else if(recMsg == "userid"){
                     options.messages[0].text = userId;
+                }else if(recMsg == "jig.jp2022"){
+                    options.messages[0].text = "新社屋おめでとう🎉\nhttps://fukuno.jig.jp/3648";
+                }else if(recMsg == "IchigoJam" || recMsg == "ichigojam" || recMsg == "イチゴジャム" || recMsg == "いちごじゃむ" || recMsg == "いちごジャム"){
+                    options.messages[0].text = "https://ichigojam.net/";
+                }else if(recMsg == "IchigoJamweb" || recMsg == "ichigojamweb" || recMsg == "IchigoJamWeb" || recMsg == "ichigojamWeb" || recMsg == "IchigoJam web" || recMsg == "IchigoJam Web"){
+                    options.messages[0].text = "https://fukuno.jig.jp/app/IchigoJam/";
+                }else if(recMsg == "川下りゲーム" || recMsg == "川下り" || recMsg == "かわくだりゲーム" || recMsg == "かわくだり"){
+                    options.messages[0].text = '10 CLS:\n20 LC X,5:?"0"\n30 LC RND(32),23:?"*"\n35 WAIT 3\n36 X=X-BTN(28)+BTN(29)\n40 IF SCR(X,5)=0 GOTO20';
                 }else if(recMsg == "リファレンス" || recMsg == "コマンド一覧" || recMsg == "コマンド"){
                     options.messages[0].text = "https://fukuno.jig.jp/app/csv/ichigojam-cmd.html";
                 }else if(led){
