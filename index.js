@@ -26,20 +26,58 @@ app.use(cors({
 app.use(express.static('public'));
 
 const IchigoJamDecoder = require("./public/IchigoJamDecoder.js");
-const parseCsv = require("./public/reference.js");
+const callReference = require("./public/reference.js");
 
 app.get("/", (req,res) => {
 
     let userId = req.query.id;
     let msg = req.query.msg;
     if(!msg) msg = "msgが未記入です";
-
+    
     let msgCharaCode = [];
     for(let i = 0; i < msg.length; i++){
         msgCharaCode.push(msg.charCodeAt(i));
     }
 
     let sendMsg = IchigoJamDecoder(msgCharaCode);
+    
+    // const checkCommand = (reference) => {
+    //     return new Promise((resolve,reject) => {
+    //         let a = [];
+    //         if(reference.result){
+    //             referenceObject = Object.values(reference.commandInfo).slice(1);
+    //             console.log("referenceObject",referenceObject);
+    //         }
+    //         resolve(referenceObject);
+    //     })
+    // }
+
+    // callReference(msg)
+    // .then((respn)=>{
+    //     let reference = respn;
+    //     checkCommand(reference)
+    //     .then((resp) => {
+    //         console.log("callback_a",resp);
+    //         let text = "";
+    //         for(const i in resp){
+    //             text += resp[i];
+    //         }
+    //         let message = {
+    //             "type": "text",
+    //             "text": text 
+    //         }
+    //         console.log("message",message);
+    //         client.pushMessage(userId,message)
+    //             .then(() => {
+    //                 console.log("プッシュメッセージを送信しました");
+    //                 console.log(sendMsg);
+    //             })
+    //             .catch((err) => {
+    //                 res.send("'wrong userID...\n");
+    //             })
+    //         res.send("");
+    //     });
+    // })
 
     const message = {
         type: "text",
@@ -47,15 +85,14 @@ app.get("/", (req,res) => {
     }
 
     client.pushMessage(userId,message)
-        .then(() => {
-            console.log("プッシュメッセージを送信しました");
-            console.log(sendMsg);
-        })
-        .catch((err) => {
-            res.send("'wrong userID...\n");
-        })
-    res.send("");
-
+    .then(() => {
+        console.log("プッシュメッセージを送信しました");
+        console.log(sendMsg);
+    })
+    .catch((err) => {
+        res.send("'wrong userID...\n");
+    })
+    ressend("");
 });
 
 app.post("/webhook", (req,res) => {
@@ -83,49 +120,51 @@ app.post("/webhook", (req,res) => {
         ]
        
         options.replyToken = replyToken;
-        options.messages = messages;    
+        options.messages = messages;
 
-
-        const getReference = () => {
+        const checkCommand = (reference) => {
             return new Promise((resolve,reject) => {
-                let reference = parseCsv(recMsg);
-                console.log("***");
-                console.log("reference",reference);
-                resolve(reference);
+                let a = [];
+                if(reference.result){
+                    referenceObject = Object.values(reference.commandInfo).slice(1);
+                    console.log("referenceObject",referenceObject);
+                }
+                resolve(referenceObject);
             })
         }
 
-        const sendMsgFnc = async () => {
-            console.log("*");
-            let reference = await getReference();
-            console.log("****");
-            if(recMsg == "userid"){
-                options.messages[0].text = userId;
-            }else if(reference.result){
-                referenceObject = Object.values(reference);
-                console.log("referenceObject",referenceObject);
-                for(const command of referenceObject){
-                    options.messages[0].text = command + "\n";
-                }
-            }else if(recMsg == "リファレンス" || recMsg == "コマンド一覧" || recMsg == "コマンド"){
-                options.messages[0].text = "https://fukuno.jig.jp/app/csv/ichigojam-cmd.html";
-            }else if(led){
-                if(ledParam == 0){
-                    options.messages[0].text = "⚫️";
-                }else if(ledParam < 0 || ledParam > 0){
-                    options.messages[0].text = "🔴";
+        callReference(recMsg)
+        .then((res)=>{
+            let reference = res;
+            console.log("reference",reference);
+            checkCommand(reference)
+            .then((response) => {
+                options.messages[0].text = response;
+                dataString = JSON.stringify(options);
+            })
+            .catch((error) => {
+                console.log(error);
+                if(recMsg == "userid"){
+                    options.messages[0].text = userId;
+                }else if(recMsg == "リファレンス" || recMsg == "コマンド一覧" || recMsg == "コマンド"){
+                    options.messages[0].text = "https://fukuno.jig.jp/app/csv/ichigojam-cmd.html";
+                }else if(led){
+                    if(ledParam == 0){
+                        options.messages[0].text = "⚫️";
+                    }else if(ledParam < 0 || ledParam > 0){
+                        options.messages[0].text = "🔴";
+                    }else{
+                        options.messages[0].text = "Syntax error";
+                    }
+        
                 }else{
                     options.messages[0].text = "Syntax error";
                 }
-                
-            }else{
-                options.messages[0].text = "Syntax error";
-            }
-            
-            dataString = JSON.stringify(options);
-            return dataString;
-        }
-
+        
+                dataString = JSON.stringify(options);
+            })
+        })
+          
 
         // リクエストヘッダー
         const headers = {
