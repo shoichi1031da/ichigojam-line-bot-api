@@ -56,7 +56,9 @@ app.get("/", (req,res) => {
         console.log(err);
         res.send("'wrong userID...\n");
     })
+    
     setTimeout(()=>{res.send("")},5000);
+
 });
 
 app.post("/webhook", (req,res) => {
@@ -70,7 +72,7 @@ app.post("/webhook", (req,res) => {
 
         //送られたメッセージをIchigoJamのリファレンス参照
         callReference(recMsg)
-        .then((ref)=>{
+        .then((reference)=>{
             // LEDコマンドの処理
             let ledParam = 0;
             let led = false;
@@ -95,7 +97,6 @@ app.post("/webhook", (req,res) => {
             const headers = {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + TOKEN
-    
             }
             
             //リファレンス（reference.js）から返ってきた結果を配列に格納（後日修正予定）
@@ -109,17 +110,14 @@ app.post("/webhook", (req,res) => {
                     resolve(referenceObject);
                 })
             }
-
-            let reference = ref;
             
-
             checkCommand(reference)
-            .then((response) => {
+            .then((checkedComand) => {
                 //送られてきたメッセージがリファレンスのコマンドと合致した時
-                if(ref.result){
+                if(reference.result){
                     let text = "";
-                    for(const i in response){
-                        text += response[i];
+                    for(const i in checkedComand){
+                        text += checkedComand[i];
                     }
                     options.messages[0].text = text;
                 }else if(recMsg == "userid"){
@@ -146,7 +144,6 @@ app.post("/webhook", (req,res) => {
                     }else{
                         options.messages[0].text = "Syntax error";
                     }
-        
                 }else{
                     options.messages[0].text = "Syntax error";
                 }
@@ -164,8 +161,8 @@ app.post("/webhook", (req,res) => {
                     "body": dataString
                 }   
                 // リクエストの定義
-                const request = https.request(webhookOptions, (res) => {
-                    res.on("data", (d) => {
+                const request = https.request(webhookOptions, (response) => {
+                    response.on("data", (d) => {
                     process.stdout.write(d)
                     })
                 })
