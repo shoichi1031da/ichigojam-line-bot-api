@@ -139,7 +139,7 @@ app.post("/webhook", (req,res) => {
                 }else if(recMsg == "MixJuice" || recMsg == "mixjuice" || recMsg == "ミックスジュース" || recMsg == "みっくすじゅーす" || recMsg == "みっくすジュース"){
                     options.messages[0].text = "http://mixjuice.shizentai.jp/";
                 }else if(recMsg == "川下りゲーム" || recMsg == "川下り" || recMsg == "かわくだりゲーム" || recMsg == "かわくだり"){
-                    options.messages[0].text = '10 CLS:\n20 LC X,5:?"0"\n30 LC RND(32),23:?"*"\n35 WAIT 3\n36 X=X-BTN(28)+BTN(29)\n40 IF SCR(X,5)=0 GOTO20';
+                    options.messages[0].text = '10 CLS:X=15\n20 LC X,5:?"0"\n30 LC RND(32),23:?"*"\n35 WAIT 3\n36 X=X-BTN(28)+BTN(29)\n40 IF SCR(X,5)=0 GOTO20';
                 }else if(recMsg == "リファレンス" || recMsg == "コマンド一覧" || recMsg == "コマンド"){
                     options.messages[0].text = "https://fukuno.jig.jp/app/csv/ichigojam-cmd.html";
                 }else if(led){
