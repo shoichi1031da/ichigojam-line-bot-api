@@ -1,4 +1,3 @@
-// require('dotenv').config();
 const line = require("@line/bot-sdk");
 const client = new line.Client({
     channelAccessToken: process.env.LINE_ACCESS_TOKEN,
@@ -13,11 +12,13 @@ const server = http.createServer(app);
 const PORT = process.env.PORT || 3000;
 const TOKEN = process.env.LINE_ACCESS_TOKEN;
 
+// POSTのデータをJSON形式で取得
 app.use(express.json());
 app.use(express.urlencoded({
     extended: true
 }));
 
+// IchigoJam webのCORS設定
 const cors = require("cors");
 app.use(cors({
     origin: "https://fukuno.jig.jp",
@@ -25,9 +26,13 @@ app.use(cors({
 
 app.use(express.static('public'));
 
+// IchigoJamのカタカナ、絵文字をデコードするファイルの読み込み
 const IchigoJamDecoder = require("./public/IchigoJamDecoder.js");
+
+// Botに送られてきたコマンドをリファレンスと照合するファイルの読み込み
 const callReference = require("./public/reference.js");
 
+// IchigoJamからのリクエストの処理（開発者モード）
 app.get("/", (req,res) => {
 
     const userId = req.query.id;
@@ -56,13 +61,14 @@ app.get("/", (req,res) => {
         console.log(err);
         res.send("'wrong userID...\n");
     })
-    
+
     setTimeout(()=>{res.send("")},5000);
 
 });
 
+// Botへ送信されたメッセージに対する処理（ユーザーモード）
 app.post("/webhook", (req,res) => {
-    res.send("HTTP POST request sent to the webhook URL!");
+    
     // ユーザーがボットにメッセージを送った場合、返信メッセージを送る
     if (req.body.events[0].type === "message") {
         
