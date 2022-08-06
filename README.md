@@ -15,9 +15,9 @@ https://ichigojam-line-bot.herokuapp.com/
 
 このアカウントは【ユーザーモード】と【開発者モード】の2つの使い方があります。
 
-## ■デモ動画
+### ■デモ動画
 
-https://twitter.com/shoichi1031da
+https://twitter.com/shoichi1031da/status/1556036378802425856
 
 ## 【ユーザーモード】
 IchigoJam BASICのコマンドや特定の言葉（隠しコマンド）を送信すると自動で返答します。
