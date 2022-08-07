@@ -90,16 +90,16 @@ app.post("/webhook", (req,res) => {
             let printParam ;
             if(recMsg.substr(0,5) == "PRINT" || recMsg.substr(0,5) == "print"){
                 printParam = recMsg.split('"')[1];
-                console.log("printParam",printParam);
                 if(!printParam){
-                    printParam = recMsg.toUpperCase();
-                    printParam = parseInt(printParam.split("PRINT")[1]);
+                    // printParam = recMsg.toUpperCase();
+                    // printParam = parseInt(printParam.split("PRINT")[1]);
+                    printParam = "ｹｲｻﾝﾑｽﾞｶｼｲ...ｺﾞﾒﾝﾈ";
                 }
             }else if (recMsg.substr(0,1) == "?"){
                 printParam = recMsg.split('"')[1];
-                console.log("?Param",printParam);
                 if(!printParam){
-                    printParam = parseInt(recMsg.split("?")[1]);
+                    // printParam = recMsg.split("?")[1];
+                    printParam = "ｹｲｻﾝﾑｽﾞｶｼｲ...ｺﾞﾒﾝﾈ";
                 }
             }
 
