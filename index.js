@@ -86,6 +86,23 @@ app.post("/webhook", (req,res) => {
                 led = true;
                 ledParam = parseInt(recMsg.split(recMsg.substr(0,3))[1]);
             }
+            // PRINT命令の処理
+            let printParam ;
+            if(recMsg.substr(0,5) == "PRINT" || recMsg.substr(0,5) == "print"){
+                printParam = rec.Msg.split('"')[1];
+                console.log("printParam",printParam);
+                if(!printParam){
+                    printParam = recMsg.toUpperCase();
+                    printParam = parseInt(printParam.split("PRINT")[1]);
+                }
+            }else if (recMsg.substr(0,1) == "?"){
+                printParam = rec.Msg.split('"')[1];
+                console.log("?Param",printParam);
+                if(!printParam){
+                    printParam = parseInt(recMsg.split("?")[1]);
+                }
+            }
+
             // LINEに送るデータ管理
             let dataString = "";
             let options = {};
@@ -150,6 +167,8 @@ app.post("/webhook", (req,res) => {
                     }else{
                         options.messages[0].text = "Syntax error";
                     }
+                }else if(printParam){
+                    options.messages[0].text = printParam;
                 }else{
                     options.messages[0].text = "Syntax error";
                 }
