@@ -95,7 +95,7 @@ app.post("/webhook", (req,res) => {
                 printParamRnd = parseInt(recMsg.split("RND(")[1].split(")"));
                 console.log("printParamRnd",printParamRnd);
                 if(printParamRnd > 0){
-                    printParam = Math.floor(Math.random() * printParamRnd)
+                    printParam = Math.floor(Math.random() * printParamRnd);
                 }else if(printParamRnd <= 0){
                     printParam = 0;
                 }else{
@@ -103,11 +103,11 @@ app.post("/webhook", (req,res) => {
                 }
             }else if (recMsg.substr(0,1) == "?"){
                 printParam = recMsg.split('"')[1];
-                recMsg = recMsg.toUpperCase();
+                recMsg = "?" + recMsg.substr(1).toUpperCase();
                 printParamRnd = parseInt(recMsg.split("RND(")[1].split(")"));
                 console.log("printParamRnd",printParamRnd);
                 if(printParamRnd > 0){
-                    printParam = Math.floor(Math.random() * printParamRnd)
+                    printParam = Math.floor(Math.random() * printParamRnd);
                 }else if(printParamRnd <= 0){
                     printParam = 0;
                 }else{
