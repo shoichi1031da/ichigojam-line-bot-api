@@ -88,17 +88,28 @@ app.post("/webhook", (req,res) => {
             }
             // PRINT命令の処理
             let printParam ;
+            let printParamRnd ;
             if(recMsg.substr(0,5) == "PRINT" || recMsg.substr(0,5) == "print"){
                 printParam = recMsg.split('"')[1];
-                if(!printParam){
-                    // printParam = recMsg.toUpperCase();
-                    // printParam = parseInt(printParam.split("PRINT")[1]);
+                recMsg = recMsg.toUpperCase();
+                printParamRnd = parseInt(recMsg.split("RND(")[1].split(")"));
+                console.log("printParamRnd",printParamRnd);
+                if(printParamRnd >= 0){
+                    printParam = Math.floor(Math.random() * printParamRnd)
+                }else if(printParamRnd < 0){
+                    printParam = "Syntax error";
+                }else{
                     printParam = "ｹｲｻﾝﾑｽﾞｶｼｲ...ｺﾞﾒﾝﾈ";
                 }
             }else if (recMsg.substr(0,1) == "?"){
                 printParam = recMsg.split('"')[1];
-                if(!printParam){
-                    // printParam = recMsg.split("?")[1];
+                printParamRnd = parseInt(recMsg.split("RND(")[1].split(")"));
+                console.log("printParamRnd",printParamRnd);
+                if(printParamRnd >= 0){
+                    printParam = Math.floor(Math.random() * printParamRnd)
+                }else if(printParamRnd < 0){
+                    printParam = "Syntax error";
+                }else{
                     printParam = "ｹｲｻﾝﾑｽﾞｶｼｲ...ｺﾞﾒﾝﾈ";
                 }
             }
