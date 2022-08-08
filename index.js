@@ -94,10 +94,10 @@ app.post("/webhook", (req,res) => {
                 recMsg = recMsg.toUpperCase();
                 printParamRnd = parseInt(recMsg.split("RND(")[1].split(")"));
                 console.log("printParamRnd",printParamRnd);
-                if(printParamRnd >= 0){
+                if(printParamRnd > 0){
                     printParam = Math.floor(Math.random() * printParamRnd)
-                }else if(printParamRnd < 0){
-                    printParam = "Syntax error";
+                }else if(printParamRnd <= 0){
+                    printParam = 0;
                 }else{
                     printParam = "ｹｲｻﾝﾑｽﾞｶｼｲ...ｺﾞﾒﾝﾈ";
                 }
@@ -106,10 +106,10 @@ app.post("/webhook", (req,res) => {
                 recMsg = recMsg.toUpperCase();
                 printParamRnd = parseInt(recMsg.split("RND(")[1].split(")"));
                 console.log("printParamRnd",printParamRnd);
-                if(printParamRnd >= 0){
+                if(printParamRnd > 0){
                     printParam = Math.floor(Math.random() * printParamRnd)
-                }else if(printParamRnd < 0){
-                    printParam = "Syntax error";
+                }else if(printParamRnd <= 0){
+                    printParam = 0;
                 }else{
                     printParam = "ｹｲｻﾝﾑｽﾞｶｼｲ...ｺﾞﾒﾝﾈ";
                 }
