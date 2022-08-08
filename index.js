@@ -103,6 +103,7 @@ app.post("/webhook", (req,res) => {
                 }
             }else if (recMsg.substr(0,1) == "?"){
                 printParam = recMsg.split('"')[1];
+                recMsg = recMsg.toUpperCase();
                 printParamRnd = parseInt(recMsg.split("RND(")[1].split(")"));
                 console.log("printParamRnd",printParamRnd);
                 if(printParamRnd >= 0){
