@@ -5,7 +5,7 @@
 こどもパソコンIchigoJamに関する情報入手や、IoTを作成するのに便利なBotです。
 
 ### LINE API
-https://ichigojam-line-bot.herokuapp.com/
+https://ichigojam.top/line
 
 ### Bot basic ID : @813pjedr
 
@@ -13,25 +13,13 @@ https://ichigojam-line-bot.herokuapp.com/
 
 <img src="https://github.com/shoichi1031da/ichigojam-line-bot/blob/main/document/qrcode.png" alt="QRコード" title="qrcode"> 
 
-このアカウントは【ユーザーモード】と【開発者モード】の2つの使い方があります。
 
 ### ■デモ動画
 
 https://twitter.com/shoichi1031da/status/1556036378802425856
 
-## 【ユーザーモード】
-IchigoJam BASICのコマンドや特定の言葉（隠しコマンド）を送信すると自動で返答します。
 
-### ■例1：「リファレンス」
-→ https://fukuno.jig.jp/app/csv/ichigojam-cmd.html を返します。
-
-### ■例2：「WAIT」または「wait」
-→ WAITコマンドの意味を返します（WAIT以外の全てコマンドにも対応）。
-
-### ■例3：隠しコマンド（下記隠しコマンドを送信してみてください）
-「jig.jp2022」「LED1」「LED0」「かわくだりゲーム」「IchigoJam」「IchigoJamweb」「MixJuice」
-
-## 【開発者モード】
+## 【使い方】
 MixJuiceを使うと、このBotを通じてあなたにLINEメッセージを送ることができます。
 
 IoT制作などにお役立てください。
@@ -39,7 +27,9 @@ IoT制作などにお役立てください。
 ### 手順1） LINEのユーザーIDを取得する
 BotからあなたのLINEにメッセージを送るには、あなたのユーザーIDが必要です。
 
-Botに「userid」と送信すると、あなたのユーザーIDを返信します。
+下記のBotをフォローし、「userid」と送信すると、あなたのユーザーIDを返信します。
+
+https://lin.ee/l3VTXzM
 
 ユーザーIDは第3者に流失しないよう、厳重に保管してください。
 
