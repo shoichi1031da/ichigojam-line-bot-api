@@ -46,7 +46,7 @@ https://github.com/shoichi1031da/ichigojam-line-bot-api/blob/main/ichigojam_samp
 
 ＜IchigoJam Webでのテスト＞
 
-https://fukuno.jig.jp/app/IchigoJam/#10%20I%3D%22%22%0A20%20M%3D%22IchigoJamweb%22%0A30%20%3F%22MJ%20GETS%20ichigojam-line-bot.herokuapp.com%2F%3Fid%3D%22%3BSTR%24(I)%3B%22%26msg%3D%22%3BSTR%24(M)%0A
+https://fukuno.jig.jp/app/IchigoJam/#10%20I%3D%22%22%0A20%20M%3D%22IchigoJamweb%22%0A30%20%3F%22MJ%20GETS%20ichigojam.top/line%2F%3Fid%3D%22%3BSTR%24(I)%3B%22%26msg%3D%22%3BSTR%24(M)%0A
 
 ※「I/O」タブをクリックし、「MixJuice」にチェックを入れてプログラムを実行してください。
 
